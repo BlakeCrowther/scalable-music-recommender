@@ -1,3 +1,6 @@
 # Ignore everything in the data directory
 data/test/*
 data/train/*
+data/.DS_Store
+.DS_Store
+EDA/.DS_Store
