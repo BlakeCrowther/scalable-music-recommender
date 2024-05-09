@@ -62,3 +62,51 @@
     - e.g. Catalog coverage measure of the proportion of unique songs in the entire catalog that are recommended to users.
   - Coverage Metrics
     - e.g. Proportion of users that receive recommendations.
+
+## Scenario I: Collaborative Filtering
+
+[Spark Collaborative Filtering](https://spark.apache.org/docs/latest/ml-collaborative-filtering.html)
+
+### Data Preparation/Preprocessing
+
+- Scale Ratings 0-1
+- Decide on train/test size
+
+### User-Item Matrix
+
+Construct user-item matrix where each row represents a user, each column represents a song, and the cell values are the ratings given by users to items.
+[pyspark.sql.GroupedData.pivot](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.GroupedData.pivot.html),
+
+### Similarity Computation
+
+- **Cosine Similarity**
+- **Pearson Correlation Coefficient**
+
+### Neighborhood Selection
+
+Select a subset of similar users for each user or item. Consider a fixed number or similarity threshold to define the neighborhood.
+
+### Rating Prediction
+
+Predict ratings for items not yet rated by a user using the ratings of similar users.
+[pyspark.ml.recommendation.ALS](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.recommendation.ALS.html)
+
+### Recommendation Generation
+
+Generate top-N recommendations for each user, ranking items based on predicted ratings and recommending the top-N items to users.
+
+### Evaluation
+
+Evaluate the performance of the algorithm using metrics such as:
+
+- **Precision**
+- **Recall**
+- **Mean Absolute Error(MAE)**
+
+### Optimization
+
+Employ techniques like factorization, dimensionality reduction, or parallel processing to improve performance.
+
+### Validation
+
+Can't do without an active user base.
