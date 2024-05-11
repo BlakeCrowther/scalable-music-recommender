@@ -6,3 +6,6 @@ data/**/train/*
 data/.DS_Store
 .DS_Store
 EDA/.DS_Store
+
+# Ignore pycache files
+__pycache__/
