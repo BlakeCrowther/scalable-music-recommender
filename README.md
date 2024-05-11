@@ -70,7 +70,7 @@
 ### Data Preparation/Preprocessing
 
 - Scale Ratings 0-1
-- Decide on train/test size
+- Split train/test
 
 ### User-Item Matrix
 
@@ -102,6 +102,8 @@ Evaluate the performance of the algorithm using metrics such as:
 - **Precision**
 - **Recall**
 - **Mean Absolute Error(MAE)**
+- **Root Mean Squared Error(RMSE)**
+- **F1-Score**
 
 ### Optimization
 
