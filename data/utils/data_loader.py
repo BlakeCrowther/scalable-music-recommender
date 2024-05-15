@@ -22,7 +22,7 @@ def load_from_hdfs(dataset, partitions=10):
         if train_data is None:
             train_data = train_partition_df
         else:
-            train_data = train_data.union(train_partition_df).cache()
+            train_data = train_data.union(train_partition_df)
         
     for i, file in enumerate(test_files):
         test_partition_df = load_file_from_hdfs(file)
@@ -33,6 +33,6 @@ def load_from_hdfs(dataset, partitions=10):
         if test_data is None:
             test_data = test_partition_df
         else:
-            test_data = test_data.union(test_partition_df).cache()
+            test_data = test_data.union(test_partition_df)
     
     return train_data, test_data
