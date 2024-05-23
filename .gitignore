@@ -11,4 +11,4 @@ EDA/.DS_Store
 __pycache__/
 
 # Ignore Jupyter Checkpoints in any parent directory
-# **/.ipynb_checkpoints
+**/.ipynb_checkpoints
