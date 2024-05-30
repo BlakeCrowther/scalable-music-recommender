@@ -2,17 +2,12 @@ from pyspark.sql.functions import col, explode, lit, row_number, when
 from pyspark.sql.window import Window
 
 def calculate_precision_recall(recommendations, test_set, relevance_threshold):
-     # Flatten the recommendations dataframe
-    recommendations = recommendations.select('user_id', explode('recommendations').alias('recommendation'))
-    recommendations = recommendations.select('user_id', col('recommendation.song_id').alias('song_id'), col('recommendation.rating').alias('prediction'))
-
-
     # Filter test set above the threshold
     test_set = test_set.withColumn('relevant', when(col('rating') >= relevance_threshold, 1).otherwise(0))
     filtered_test_data = test_set.filter(col('relevant') == 1)
 
     # Filter recommendations above the threshold
-    filtered_recommendation_data = recommendations.withColumn('relevant', when(col('prediction') >= relevance_threshold, 1).otherwise(0))
+    filtered_recommendation_data = recommendations.withColumn('relevant', when(col('rating') >= relevance_threshold, 1).otherwise(0))
     filtered_recommendation_data = filtered_recommendation_data.filter(col('relevant') == 1)
     
     # Join the recommendations and test set 
