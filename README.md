@@ -25,6 +25,21 @@
   - `genre-hierarchy.txt`: Each line of this file lists the id number for a genre, the id number of the parent of that genre, the level of the genre in the hierarchy, and the name of the genre.
     - `genre id<TAB>parent genre id<TAB>level<TAB>genre name`
 
+## Code Organization
+  - Code is organized by notebooks and scripts in its corresponding function (data, EDA, models)
+  - Notebooks are boken into evaluation, partition selection, EDA data preparation, training sections
+
+## Reproduction of Results
+  - Get data from website
+  - Store train and test files in repective paths ./data/utils/work/data/raw/test and ./data/utils/work/data/raw/test
+  - Run notebook load_to_hdfs.ipynb in ./data/utils
+  - Run partition selection.ipynb for our partition selection results
+  - Run EDA.ipynb for EDA results
+  - Run data preparation.ipynb for data preparation results
+  - Run training.ipynb for model training results
+  - Run evaluation.ipynb for evaluation results
+    
+
 ## Considerations
 
 - **Data Preparation**
