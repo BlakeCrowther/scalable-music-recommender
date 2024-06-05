@@ -41,11 +41,11 @@
 ### notebooks
   - EDA.ipynb
       - notebook to complete EDA steps, which includes visualization of data and selecting an appropriate data partition accordingly
-  - Data_Preparation.ipynb
+  - data_preparation.ipynb
       - notebook to retrieve cleaned data, balance distributions by downcasting outliers, and prepare data for model 
-  - Training.ipynb
+  - training.ipynb
       - notebook to train ALS model based on hyperparameter tuning and model evaluator
-  - Evalulation.ipynb
+  - evalulation.ipynb
       - notebook to get predictions from model and evaluate the model with evaluation metrics
 #### Note: 
 - __init__.py files are used to declare the directory as python module
