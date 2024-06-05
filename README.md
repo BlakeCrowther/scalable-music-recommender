@@ -47,6 +47,8 @@
       - notebook to train ALS model based on hyperparameter tuning and model evaluator
   - Evalulation.ipynb
       - notebook to get predictions from model and evaluate the model with evaluation metrics
+#### Note: 
+- __init__.py files are used to declare the directory as python module
   
 ## Reproduction of Results
     1. Get data from website
