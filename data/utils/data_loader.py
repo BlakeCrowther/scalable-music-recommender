@@ -7,39 +7,31 @@ def load_file_from_hdfs(file_name):
     spark = SparkSession.getActiveSession()
     return spark.read.csv(hdfs_file_path, sep="\t", header=False, inferSchema=True)
 
-def load_from_hdfs(dataset, partitions=10):
-    train_files = [f"{dataset}/train/train_{i}.txt" for i in range(partitions)]
-    test_files = [f"{dataset}/test/test_{i}.txt" for i in range(partitions)]
+def load_from_hdfs(dataset, partition_number=0):
+    train_file = f"{dataset}/train/train_{partition_number}.txt"
+    test_file = f"{dataset}/test/test_{partition_number}.txt"
 
-    train_data = None
-    test_data = None
-    for i, file in enumerate(train_files):
-        train_partition_df = load_file_from_hdfs(file)
-        train_partition_df = rename_and_reorder_columns(train_partition_df)
-        # Add a partition column
-        train_partition_df = train_partition_df.withColumn("partition_id", F.lit(i))
-        # Combine all the partitions
-        if train_data is None:
-            train_data = train_partition_df
-        else:
-            train_data = train_data.union(train_partition_df)
-        
-    for i, file in enumerate(test_files):
-        test_partition_df = load_file_from_hdfs(file)
-        test_partition_df = rename_and_reorder_columns(test_partition_df)
-        # Add a partition column
-        test_partition_df = test_partition_df.withColumn("partition_id", F.lit(i))
-        # Combine all the partitions
-        if test_data is None:
-            test_data = test_partition_df
-        else:
-            test_data = test_data.union(test_partition_df)
-    
-    print(f"Loaded {train_data.count()} training records and {test_data.count()} test records from HDFS")
+    train_data = load_file_from_hdfs(train_file)
+    train_data = rename_and_reorder_columns(train_data)
+    train_data = train_data.withColumn("partition_id", F.lit(partition_number))
+
+    test_data = load_file_from_hdfs(test_file)
+    test_data = rename_and_reorder_columns(test_data)
+    test_data = test_data.withColumn("partition_id", F.lit(partition_number))
+
+    print(f"Loaded partition {partition_number}: {train_data.count()} training records and {test_data.count()} test records from HDFS")
     train_data.printSchema()
-    
+
     return train_data, test_data
 
+# Load a single dataset file from HDFS and rename/reorder columns.
+def load_data(file_path):
+    data = load_file_from_hdfs(file_path)
+    data = rename_and_reorder_columns(data)
+    data.printSchema()
+    print(f"Loaded {data.count()} records from HDFS")
+    return data
+    
 
 def rename_and_reorder_columns(df):
     # Determine the number of columns in the DataFrame

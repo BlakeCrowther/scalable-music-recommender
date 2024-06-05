@@ -3,6 +3,7 @@ data/test/*
 data/train/*
 data/**/test/*
 data/**/train/*
+data/processed/*
 data/.DS_Store
 .DS_Store
 EDA/.DS_Store
